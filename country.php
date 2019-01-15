@@ -12,13 +12,17 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO city VALUES ('Göteborg')";
+$sql = "SELECT id, cityName, countryId, invanare FROM city";
 
-if ($conn->query($sql)===TRUE) {
-    $last_id = $conn->insert_id;
-    echo "New record created successfully. Last inserted ID is:" . $last_id;
+$result = $conn->query($sql);
+
+if($result->num_rows>0){
+    //output data of each row
+    while($row=$result->fetch_assoc()) {
+        echo "<a href='cityInfo.php'>".$row["cityName"]."</a><br>";
+    }
 } else {
-    echo "Error:" . $sql . "<br>" . $conn->error;
+    echo "0 results";
 }
 
 $conn->close();
