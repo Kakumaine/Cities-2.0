@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 
 $result = $conn->query($sql);
 
-
+$input=$_POST['name'];
 
 $conn->close();
 ?>
@@ -25,6 +25,10 @@ $conn->close();
 
     </head>
     <body>
-        
+        <form method="post">
+            <input type="text" name="name">
+
+            <button type="submit">Post</button>
+        </form>
     </body>
 </html>
